@@ -17,15 +17,24 @@ def read_data(file_name, field):
             - str: If field is 'dna_sequence'.
             - None: If the field is not supported.
     """
+    povolene_fieldy = {'unordered_numbers', 'ordered_numbers', 'dna_sequence'}
+    for field in povolene_fieldy:
+        return None
+
     # get current working directory path
     cwd_path = Path.cwd()
     
     file_path = cwd_path / file_name
 
+    with open(file_path, "r", encoding="UTF-8") as file:
+        data = json.load(file)
+
+    return data.get(field)
 
 def main():
-    pass
 
+    sequential_data = read_data('sequential.json', 'unordered_numbers')
+    print(sequential_data)
 
 if __name__ == "__main__":
     main()
