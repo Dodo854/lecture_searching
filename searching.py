@@ -63,14 +63,16 @@ def binary_search(sequence, searched_number):
 
 def main():
 
-    sequential_data = read_data('sequential.json', 'unordered_numbers')
+    sequential_data = read_data("sequential.json", "unordered_numbers")
     print(sequential_data)
 
     hledane = 8
     print(linear_search(sequential_data, hledane))
 
-    nase = 0
-    print(binary_search(sequential_data, nase))
+    sequential_data_un = read_data("sequential.json", "ordered_numbers")
+
+    nase = 14
+    print(binary_search(sequential_data_un, nase))
 
 if __name__ == "__main__":
 
