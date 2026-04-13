@@ -1,6 +1,7 @@
-from msilib import make_id
 from pathlib import Path
 import json
+import time
+import matplotlib.pyplot as plt
 
 
 def read_data(file_name, field):
@@ -61,6 +62,49 @@ def binary_search(sequence, searched_number):
 
     return None
 
+from generators import ordered_sequence
+
+def compare_search():
+
+    sizes = [100, 500, 1000, 5000, 10000]
+    cycles = 100
+    linear_times = []
+    binary_times = []
+    hop = 2000
+
+    for size in sizes:
+        sequence_o = ordered_sequence(size)
+        start = time.perf_counter()
+        for i in range(cycles):
+            linear_search(sequence_o, hop)
+            break
+
+        end = time.perf_counter()
+        duration = end - start
+
+        linear_times.append(duration)
+
+        start = time.perf_counter()
+        for i in range(cycles):
+            binary_search(sequence_o, hop)
+            break
+
+        end = time.perf_counter()
+        duration = end - start
+
+        binary_times.append(duration)
+
+
+    plt.plot(sizes, linear_times)
+    plt.plot(sizes, binary_times)
+
+    plt.xlabel("Porovnání algoritmů")
+    plt.ylabel("Čas [s]")
+    plt.title("Ukázkový graf měření")
+    plt.show()
+
+
+
 def main():
 
     sequential_data = read_data("sequential.json", "unordered_numbers")
@@ -73,6 +117,8 @@ def main():
 
     nase = 14
     print(binary_search(sequential_data_un, nase))
+
+    compare_search()
 
 if __name__ == "__main__":
 
