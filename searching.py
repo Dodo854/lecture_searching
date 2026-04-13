@@ -1,3 +1,4 @@
+from msilib import make_id
 from pathlib import Path
 import json
 
@@ -41,6 +42,25 @@ def linear_search(sequence, searched_number):
 
     return {"positions": positions, "count": count}
 
+def binary_search(sequence, searched_number):
+
+    left = 0
+    right = len(sequence) - 1
+
+    while left <= right:
+
+        mid = (left + right) // 2
+        mid_hodnota = sequence[mid]
+
+        if mid_hodnota == searched_number:
+            return mid
+        elif mid_hodnota < searched_number:
+            left = mid + 1
+        else:
+            right = mid - 1
+
+    return None
+
 def main():
 
     sequential_data = read_data('sequential.json', 'unordered_numbers')
@@ -48,6 +68,9 @@ def main():
 
     hledane = 8
     print(linear_search(sequential_data, hledane))
+
+    nase = 0
+    print(binary_search(sequential_data, nase))
 
 if __name__ == "__main__":
 
