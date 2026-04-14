@@ -104,6 +104,24 @@ def compare_search():
     plt.show()
 
 
+def pattern_search(sequence, pattern):
+
+    positions = []
+    match = False
+
+    for i in range(sequence):
+        for k, d in enumerate(pattern):
+            if sequence[i+k] == pattern[d]:
+                match = True
+            else:
+                match = False
+                break
+        if match:
+            positions.append(i)
+        match = False
+    return positions
+
+
 
 def main():
 
